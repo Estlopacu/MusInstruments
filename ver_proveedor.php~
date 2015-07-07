@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel=stylesheet href="stilos_site.css" type="text/css">
+<title>Documento sin t&iacute;tulo</title>
+
+</head>
+
+<body bgcolor="#FFFFFF">
+<center>
+<?php 
+include ("conexion.php");
+echo "<h1>Proveedores</h1>";
+$result = mysql_query("SELECT * FROM proveedores", $link); 
+if ($row = mysql_fetch_array($result)){ 
+   echo "<table border = '1'> \n"; 
+   echo "<tr><td>ID</td><td>Nombre</td><td>Tipo</td><td>Producto</td><td>Ubicacion</td></tr> \n"; 
+   do { 
+      echo "<tr><td>".$row["id"]."</td><td>".$row["nombre"]."</td><td>".$row["tipo"]."</td><td>".$row["producto"]."</td><td>".$row["ubicacion"]."</td></tr> \n"; 
+   } while ($row = mysql_fetch_array($result)); 
+   echo "</table> \n"; 
+} else { 
+echo "¡ No se ha encontrado ningún registro !"; 
+} 
+?> 
+</center>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<playlist version="1" xmlns="http://xspf.org/ns/0/">
+    <title>Ounage Playlist</title>
+    <creator>Dew</creator>
+    <link>http://www.blup.fr/</link>
+    <info>The Best Playlist for Testing</info>
+    <image>covers/tracklist.jpg</image>
+
+    <trackList>
+
+        <track>
+          <location>banner_images/playlist/mp3/Sad But True.mp3</location>
+          <creator>Metallica</creator>
+          <album>Black Album</album>
+          <title>Sad but true</title>
+          <annotation></annotation>
+          <duration>32000</duration>
+          <image>covers/The Black Album.jpg</image>
+          <info></info>
+          <link></link>
+        </track>
+        
+ <track>
+          <location>banner_images/playlist/mp3/Hysteria.mp3</location>
+          <creator>Muse</creator>
+          <album>Best of Muse</album>
+          <title>Hysteria</title>
+          <annotation></annotation>
+          <duration>32000</duration>
+          <image>covers/bestofmuse.jpg</image>
+          <info></info>
+          <link></link>
+        </track>
+
+ <track>
+          <location>banner_images/playlist/mp3/De Musica Ligera.mp3</location>
+          <creator>Soda Stereo</creator>
+          <album>Me veras volver</album>
+          <title>De Musica Ligera</title>
+          <annotation></annotation>
+          <duration>32000</duration>
+          <image>covers/Gira.jpg</image>
+          <info></info>
+          <link></link>
+        </track>
+
+<track>
+          <location>banner_images/playlist/mp3/jugodepina.mp3</location>
+          <creator>No SE!</creator>
+          <album>Menos!!</album>
+          <title>Jugo de piña</title>
+          <annotation></annotation>
+          <duration>32000</duration>
+          <image></image>
+          <info></info>
+          <link></link>
+        </track>
+
+    </trackList>
+</playlist>

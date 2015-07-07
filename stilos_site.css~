@@ -1,0 +1,36 @@
+@charset "utf-8";
+/* CSS de MusIns Document */
+
+body 
+{
+	background-color: #000000;
+}
+
+p
+{
+color:#FFFFFF;
+font-family:"Times New Roman", Times, serif;
+}
+
+th,td
+{
+color:#FFFFFF;
+}
+table
+{
+border:hidden;
+}
+ul
+{
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 12px;
+line-height: 2em;
+}
+h1
+{
+	color: red;
+font-weight:bold;
+font-size: x-large;
+	}
+
+

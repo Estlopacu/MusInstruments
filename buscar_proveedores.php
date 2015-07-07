@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin t&iacute;tulo</title>
+<link rel=stylesheet href="stilos_site.css" type="text/css">
+</head>
+
+<body>
+<center>
+<?php	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 		 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	  
+include ("conexion.php");
+
+$buscar=$_POST['T1'];
+
+if ($buscar==""){//Isset busca valores nulos!!!!!!! 
+      echo "<p>Debe especificar un id del proveedor para buscar</p>"; 
+      echo "?></html></body>"; 
+      exit; 
+}
+else
+{echo "<p>La busqueda para el id  ".$buscar." arrojo la siguiente seleccion.</p>";}
+
+$result = mysql_query("SELECT * FROM proveedores WHERE id LIKE '%$buscar%' ORDER BY id", $link); 
+if ($row = mysql_fetch_array($result))	{ 
+      echo "<table border = '1'> \n"; 
+//Mostramos los nombres de las tablas 
+echo "<tr> \n"; 
+while ($field = mysql_fetch_field($result)){ 
+            echo "<td>$field->name</td> \n"; 
+} 
+      echo "</tr> \n"; 
+do { 
+            echo "<tr> \n"; 
+            echo "<td>".$row["id"]."</td> \n"; 
+            echo "<td>".$row["nombre"]."</td> \n"; 
+            echo "<td>".$row["tipo"]."</td> \n"; 
+            echo "<td>".$row["producto"]."</td> \n"; 
+            echo "<td>".$row["ubicacion"]."</td> \n"; 
+            echo "</tr> \n"; 
+      } while ($row = mysql_fetch_array($result)); 
+            echo "</table> \n"; 
+} else { 
+echo "¡ No se ha encontrado ningún registro !"; 
+} 
+?> 
+</center>
+
+</body>
+</html>

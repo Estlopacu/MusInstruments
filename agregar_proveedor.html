@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin t&iacute;tulo</title>
+<link rel=stylesheet href="stilos_site.css" type="text/css">
+<script type="text/javascript">
+<!--
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+//-->
+</script>
+</head>
+
+<body>
+<center>
+<h1>Agregar proveedores</h1></center>
+<form method="post" action="agregar_proveedor.php">
+<table width="469" height="147" border="0" align="center">
+  <tr>
+    <td scope="row">&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td scope="row"><div align="right">Nombre: </div></td>
+    <td><input type="text" name="nombre" /></td>
+  </tr>
+  <tr>
+    <td scope="row"><div align="right"></div></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="224" scope="row"><div align="right">Tipo:</div></td>
+    <td width="235"><select name="tipo" id="tipo">
+      <option value="nacional">Nacional</option>
+      <option value="internacional">Internacional</option>
+            </select></td>
+  </tr>
+  <tr>
+    <td scope="row"><div align="right"></div></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td scope="row"><div align="right">Principal Producto:</div></td>
+    <td><input type="text" name="producto" /></td>
+  </tr>
+  <tr>
+    <td scope="row"><div align="right"></div></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td scope="row"><div align="right">Ubicacion:</div></td>
+    <td><select name="provincia" id="provincia">
+      <option value="San José" selected="selected">San José</option>
+      <option value="Alajuela">Alajuela</option>
+      <option value="Cartago">Cartago</option>
+      <option value="Limon">Limón</option>
+      <option value="Puntarenas">Puntarenas</option>
+      <option value="Guanacaste">Guanacaste</option>
+                      </select></td>
+  </tr>
+  <tr>
+    <td scope="row">&nbsp;</td>
+    <td scope="row">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" scope="row">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" scope="row"><center><input type="submit" name="enviar" value="Aceptar información" /></center></td>
+  </tr>
+</table>
+</form>
+
+</body>
+</html>

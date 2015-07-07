@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin t&iacute;tulo</title>
+<link rel=stylesheet href="stilos_site.css" type="text/css">
+
+</head>
+
+<body bgcolor="#FFFFFF">
+<center>
+<?php	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 		 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 
+// process form
+//Conexion a MySQL
+include ("conexion.php");
+//Conexion a MySQL
+
+//trae los valores del form
+$usuario=$_POST['usuario'];
+$instrumento=$_POST['instrumento'];
+$comentario=$_POST['comentario'];
+ 
+$sql = "INSERT INTO comentarios (usuario,instrumento,comentario) VALUES ('$usuario', '$instrumento', '$comentario')";
+$result = mysql_query($sql);
+echo "<p><h1>Comentario agregado!!!!<h1></p>";
+?>
+</center>
+</body>
+</html>

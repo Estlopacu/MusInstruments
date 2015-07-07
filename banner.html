@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin t&iacute;tulo</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<style type="text/css">
+
+/*Example CSS for the two demo scrollers*/
+
+#pscroller1{
+width: 150px;
+height: 250px;
+border: 2px solid white;
+padding: 5px;
+background-color: black;
+color:#FFFFFF
+}
+
+</style>
+
+<script type="text/javascript">
+
+/*Example message arrays for the two demo scrollers*/
+
+var pausecontent=new Array()
+pausecontent[0]='<strong>Hysteria</strong> - <br> (also known as "Hysteria (I Want It Now)" in the USA)[1] is a song by English rock band Muse and is featured on their third studio album, Absolution. It was also released as a single from that album on 1 December 2003 in the United Kingdom'
+pausecontent[1]='<strong>De Música Ligera</strong> <br>Es una canción y sencillo creada por Gustavo Cerati e interpretada por la banda argentina Soda Stereo. Fue lanzada como tema Nº 6 del álbum Canción Animal, que salió a la venta el 20 de diciembre de 1990, considerado la obra maestra del grupo.'
+pausecontent[2]='<strong>Sad but True</strong><br>Is a song by the American heavy metal band Metallica. It was released as the fifth and final single from their eponymous fifth album, Metallica.'
+
+</script>
+
+<script type="text/javascript">
+
+/***********************************************
+* Pausing up-down scroller- © Dynamic Drive (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit http://www.dynamicdrive.com/ for this script and 100s more.
+***********************************************/
+
+function pausescroller(content, divId, divClass, delay){
+this.content=content //message array content
+this.tickerid=divId //ID of ticker div to display information
+this.delay=delay //Delay between msg change, in miliseconds.
+this.mouseoverBol=0 //Boolean to indicate whether mouse is currently over scroller (and pause it if it is)
+this.hiddendivpointer=1 //index of message array for hidden div
+document.write('<div id="'+divId+'" class="'+divClass+'" style="position: relative; overflow: hidden"><div class="innerDiv" style="position: absolute; width: 100%" id="'+divId+'1">'+content[0]+'</div><div class="innerDiv" style="position: absolute; width: 100%; visibility: hidden" id="'+divId+'2">'+content[1]+'</div></div>')
+var scrollerinstance=this
+if (window.addEventListener) //run onload in DOM2 browsers
+window.addEventListener("load", function(){scrollerinstance.initialize()}, false)
+else if (window.attachEvent) //run onload in IE5.5+
+window.attachEvent("onload", function(){scrollerinstance.initialize()})
+else if (document.getElementById) //if legacy DOM browsers, just start scroller after 0.5 sec
+setTimeout(function(){scrollerinstance.initialize()}, 500)
+}
+
+// -------------------------------------------------------------------
+// initialize()- Initialize scroller method.
+// -Get div objects, set initial positions, start up down animation
+// -------------------------------------------------------------------
+
+pausescroller.prototype.initialize=function(){
+this.tickerdiv=document.getElementById(this.tickerid)
+this.visiblediv=document.getElementById(this.tickerid+"1")
+this.hiddendiv=document.getElementById(this.tickerid+"2")
+this.visibledivtop=parseInt(pausescroller.getCSSpadding(this.tickerdiv))
+//set width of inner DIVs to outer DIV's width minus padding (padding assumed to be top padding x 2)
+this.visiblediv.style.width=this.hiddendiv.style.width=this.tickerdiv.offsetWidth-(this.visibledivtop*2)+"px"
+this.getinline(this.visiblediv, this.hiddendiv)
+this.hiddendiv.style.visibility="visible"
+var scrollerinstance=this
+document.getElementById(this.tickerid).onmouseover=function(){scrollerinstance.mouseoverBol=1}
+document.getElementById(this.tickerid).onmouseout=function(){scrollerinstance.mouseoverBol=0}
+if (window.attachEvent) //Clean up loose references in IE
+window.attachEvent("onunload", function(){scrollerinstance.tickerdiv.onmouseover=scrollerinstance.tickerdiv.onmouseout=null})
+setTimeout(function(){scrollerinstance.animateup()}, this.delay)
+}
+
+
+// -------------------------------------------------------------------
+// animateup()- Move the two inner divs of the scroller up and in sync
+// -------------------------------------------------------------------
+
+pausescroller.prototype.animateup=function(){
+var scrollerinstance=this
+if (parseInt(this.hiddendiv.style.top)>(this.visibledivtop+5)){
+this.visiblediv.style.top=parseInt(this.visiblediv.style.top)-5+"px"
+this.hiddendiv.style.top=parseInt(this.hiddendiv.style.top)-5+"px"
+setTimeout(function(){scrollerinstance.animateup()}, 50)
+}
+else{
+this.getinline(this.hiddendiv, this.visiblediv)
+this.swapdivs()
+setTimeout(function(){scrollerinstance.setmessage()}, this.delay)
+}
+}
+
+// -------------------------------------------------------------------
+// swapdivs()- Swap between which is the visible and which is the hidden div
+// -------------------------------------------------------------------
+
+pausescroller.prototype.swapdivs=function(){
+var tempcontainer=this.visiblediv
+this.visiblediv=this.hiddendiv
+this.hiddendiv=tempcontainer
+}
+
+pausescroller.prototype.getinline=function(div1, div2){
+div1.style.top=this.visibledivtop+"px"
+div2.style.top=Math.max(div1.parentNode.offsetHeight, div1.offsetHeight)+"px"
+}
+
+// -------------------------------------------------------------------
+// setmessage()- Populate the hidden div with the next message before it's visible
+// -------------------------------------------------------------------
+
+pausescroller.prototype.setmessage=function(){
+var scrollerinstance=this
+if (this.mouseoverBol==1) //if mouse is currently over scoller, do nothing (pause it)
+setTimeout(function(){scrollerinstance.setmessage()}, 100)
+else{
+var i=this.hiddendivpointer
+var ceiling=this.content.length
+this.hiddendivpointer=(i+1>ceiling-1)? 0 : i+1
+this.hiddendiv.innerHTML=this.content[this.hiddendivpointer]
+this.animateup()
+}
+}
+
+pausescroller.getCSSpadding=function(tickerobj){ //get CSS padding value, if any
+if (tickerobj.currentStyle)
+return tickerobj.currentStyle["paddingTop"]
+else if (window.getComputedStyle) //if DOM2
+return window.getComputedStyle(tickerobj, "").getPropertyValue("padding-top")
+else
+return 0
+}
+
+</script>
+
+<style type="text/css">
+
+#myslideshow{ /*sample CSS for demo*/
+border:2px solid black;
+}
+
+</style>
+
+<script src="translucentslideshow.js" type="text/javascript">
+</script>
+
+<script type="text/javascript">
+
+var translideshow1=new translideshow({
+	wrapperid: "myslideshow", //ID of blank DIV on page to house Slideshow
+	dimensions: [800, 180], //width/height of gallery in pixels. Should reflect dimensions of largest image
+	imagearray: [
+		["banner_images/1.jpg"], //["image_path", "optional_link", "optional_target"]
+		["banner_images/2.jpg"],
+		["banner_images/3.jpg"],
+		["banner_images/4.jpg"]//<--no trailing comma after very last image element!
+	],
+	displaymode: {type:'auto', pause:4000, cycles:9, pauseonmouseover:true},
+	orientation: "h", //Valid values: "h" or "v"
+	persist: true, //remember last viewed slide and recall within same session?
+	slideduration: 1500 //transition duration (milliseconds)
+})
+
+</script>
+
+<script src="Scripts/AC_RunActiveContent.js" type="text/javascript"></script>
+</head>
+
+<body onLoad="init()">
+<script> var ld=(document.all);  var ns4=document.layers; var ns6=document.getElementById&&!document.all; var ie4=document.all;  if (ns4) 	
+  ld=document.loading; else if (ns6) 	ld=document.getElementById("loading").style; else if (ie4) 	ld=document.all.loading.style;  function init() { if(ns4){ld.visibility="hidden";} else if (ns6||ie4) ld.display="none"; } </script>
+  
+<center>
+<div id="myslideshow"></div>
+</center>
+
+<br>
+<hr />
+<p><br />
+    <script type="text/javascript">
+AC_FL_RunContent( 'type','application/x-shockwave-flash','data','banner_images/playlist/dewplayer-playlist.swf','width','240','height','200','id','dewplayer','name','dewplayer','wmode','transparent','movie','banner_images/playlist/dewplayer-playlist','flashvars','showtime=true&autoreplay=true&xml=banner_images/playlist/playlist.xml' ); //end AC code
+  </script>
+  <noscript>
+    <object type="application/x-shockwave-flash" data="banner_images/playlist/dewplayer-playlist.swf" width="240" height="200" id="dewplayer" name="dewplayer">
+      <param name="wmode" value="transparent" />
+      <param name="movie" value="banner_images/playlist/dewplayer-playlist.swf" />
+      <param name="flashvars" value="showtime=true&autoreplay=true&xml=banner_images/playlist/playlist.xml" />
+    </object>
+  </noscript>
+  
+  <!--<a href="javascript:translideshow1.navigate('back')" style="margin-right:190px;">back</a>  <a href="javascript:translideshow1.navigate('forth')">forth</a>
+<br />
+<b>Or go to a particular slide:</b><br />
+<a href="javascript:translideshow1.navigate(0)">1st slide</a> | <a href="javascript:translideshow1.navigate(1)">2nd slide</a> | <a href="javascript:translideshow1.navigate(2)">3rd slide</a> |<a href="javascript:translideshow1.navigate(3)">4th slide</a> 
+-->
+</p>
+<p>&nbsp;</p>
+
+<br /><hr />
+<script type="text/javascript">
+
+new pausescroller(pausecontent, "pscroller1", "someclass", 3000)
+document.write("<br />")
+
+</script>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>
